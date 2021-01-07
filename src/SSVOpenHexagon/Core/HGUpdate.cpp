@@ -226,6 +226,7 @@ void HexagonGame::updateWalls(ssvu::FT mFT)
         return;
     }
 
+
     for(CWall& w : walls)
     {
         if(!w.isOverlapping(pPos))

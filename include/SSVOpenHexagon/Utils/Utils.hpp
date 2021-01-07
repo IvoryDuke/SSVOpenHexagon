@@ -56,6 +56,10 @@ inline void uppercasify(std::string& s)
     return ssvs::getGlobalHeight(font);
 }
 
+bool getLinesIntersection(sf::Vector2f& mIntersection,
+    const sf::Vector2f& l1p1, const sf::Vector2f& l1p2,
+    const sf::Vector2f& l2p1, const sf::Vector2f& l2p2);
+
 [[nodiscard, gnu::pure]] inline float fastSqrt(const float &n) 
 {
     static union{int i; float f;} u;
