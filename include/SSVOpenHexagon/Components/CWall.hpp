@@ -20,6 +20,7 @@ class CWall
 {
 private:
     std::array<sf::Vector2f, 4> vertexPositions;
+    std::array<sf::Vector2f, 4> oldVertexPositions;
 
     SpeedData speed;
     SpeedData curve;
@@ -64,9 +65,15 @@ public:
     void setHueMod(float mHueMod) noexcept;
 
     [[gnu::always_inline, nodiscard]] const std::array<sf::Vector2f, 4>&
-    getVertexPositions() const noexcept
+        getVertexPositions() const noexcept
     {
         return vertexPositions;
+    }
+
+    [[gnu::always_inline, nodiscard]] const std::array<sf::Vector2f, 4>&
+        getOldVertexPositions() const noexcept
+    {
+        return oldVertexPositions;
     }
 
     [[gnu::always_inline, nodiscard]] const SpeedData& getSpeed() const noexcept

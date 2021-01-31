@@ -37,20 +37,17 @@ void CCustomWall::draw3D(HexagonGame& mHexagonGame, const sf::Color& mColor)
     const sf::Vector2f& offset3D{mHexagonGame.get3DOffset()};
     mHexagonGame.wallQuads3D.reserve_more(4 * 4);
 
-    unsigned int next;
-    for(unsigned int i{0}; i < 4; ++i)
+    for(unsigned int i{0u}, j{3u}; i < 4u; j = i++)
     {
-        next = (i + 1) % 4;
-
         mHexagonGame.wallQuads3D.unsafe_emplace_back(
             vertexPositions[i], mColor);
 
         mHexagonGame.wallQuads3D.unsafe_emplace_back(
-            vertexPositions[next], mColor);
+            vertexPositions[j], mColor);
 
         mHexagonGame.wallQuads3D.unsafe_emplace_back(
-            sf::Vector2f{vertexPositions[next].x + offset3D.x,
-                vertexPositions[next].y + offset3D.y},
+            sf::Vector2f{vertexPositions[j].x + offset3D.x,
+                vertexPositions[j].y + offset3D.y},
             mColor);
 
         mHexagonGame.wallQuads3D.unsafe_emplace_back(

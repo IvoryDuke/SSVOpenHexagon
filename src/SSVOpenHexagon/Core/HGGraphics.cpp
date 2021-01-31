@@ -118,6 +118,7 @@ void HexagonGame::drawProjections()
     wallQuads.clear();
     playerTris.clear();
     capTris.clear();
+    capQuads.clear();
 
     if(!Config::getNoBackground())
     {
@@ -145,7 +146,7 @@ void HexagonGame::drawProjections()
     backgroundCamera.setSkew(skew);
 
     const float depth(styleData._3dDepth);
-    const std::size_t numWallQuads(wallQuads.size());
+    const std::size_t numWallQuads(wallQuads.size() + capQuads.size());
     const std::size_t numPlayerTris(playerTris.size());
 
     wallQuads3D.reserve(numWallQuads * depth);
@@ -170,6 +171,7 @@ void HexagonGame::drawProjections()
     for(unsigned int i = 0; i < depth; ++i)
     {
         wallQuads3D.unsafe_emplace_other(wallQuads);
+        wallQuads3D.unsafe_emplace_other(capQuads);
         playerTris3D.unsafe_emplace_other(playerTris);
 
         depthIndex = depth - i - 1;
@@ -196,6 +198,7 @@ void HexagonGame::drawProjections()
     render(wallQuads);
     render(playerTris);
     render(capTris);
+    render(capQuads);
 }
 
 void HexagonGame::draw3D()

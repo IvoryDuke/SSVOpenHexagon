@@ -378,18 +378,24 @@ private:
     float getLevelSelectionHeight() const;
     float getLevelListHeight() const
     {
-        return levelLabelHeight * lvlDrawer->levelDataIds.size() + slctFrameSize;
+        return levelLabelHeight * (focusHeld ? 1 : lvlDrawer->levelDataIds.size()) +
+               slctFrameSize;
     }
 
-    static inline constexpr float baseScrollSpeed{45.f};
+    static inline constexpr float baseScrollSpeed{30.f};
+
     void calcPackChangeScrollSpeed()
     {
-        // Only speed up the animation if there are more than 12 levels.
+        // Only speed up the animation if there are more than 16 levels.
         scrollSpeed =
-            baseScrollSpeed * std::max(lvlDrawer->levelDataIds.size() / 12.f, 1.f);
+            baseScrollSpeed * std::max(lvlDrawer->levelDataIds.size() / 16.f, 1.f);
     }
     void calcLevelChangeScroll(const int dir);
-    void calcPackChangeScroll();
+    void calcPackChangeScrollFold(const float mLevelListHeight);
+    void calcPackChangeScrollStretch(const float mLevelListHeight);
+    void quickPackFold();
+    void quickPackStretch();
+    void scrollLevelListToTargetY(ssvu::FT mFT);
 
     void scrollName(std::string& text, float& scroller);
     void scrollNameRightBorder(std::string& text, const std::string key,
