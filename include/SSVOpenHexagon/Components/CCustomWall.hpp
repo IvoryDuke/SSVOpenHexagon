@@ -71,9 +71,20 @@ public:
         return vertexPositions[vertexIndex];
     }
 
+    [[gnu::always_inline, nodiscard]]
+    const std::array<sf::Vector2f, 4>& getVertexPositions() const noexcept
+    {
+        return vertexPositions;
+    }
+
     [[gnu::always_inline, nodiscard]] bool getCanCollide() const noexcept
     {
         return canCollide;
+    }
+
+    [[gnu::always_inline, nodiscard]] bool isCustomWall() const noexcept
+    {
+        return true;
     }
 };
 
